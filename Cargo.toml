@@ -1,0 +1,11 @@
+[package]
+name = "rust_requal"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rust-htslib = "0.40"
+intervaltree = "0.2"
+crossbeam = "0.8"
+clap = { version = "4.3", features = ["derive"] }
+rayon = "1.7"
