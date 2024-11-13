@@ -4,22 +4,27 @@
 
 ## 安装
 
-bash
-
 克隆仓库
+```bash
 git clone [repository_url]
+```
+进入目录
+```bash
 cd bam-mapq-updater
+```
 
 编译
+```bash
 cargo build --release
+```
 编译后的程序位于
 ./target/release/rust_requal
 
-
 ## 使用方法
 
+```bash
 ./target/release/rust_requal -b input.bam -d target.bed -o output.bam
-
+```
 
 ## 参数说明：
 - `-b, --bam <BAM_FILE>`: 输入的 BAM 文件
