@@ -175,23 +175,19 @@ fn update_bam_mapq(bam_file: &str, bed_file: &str, output_bam_file: &str) -> Res
                     Err(e) => return Err(ProcessError::BamError(e)),
                 }
             }
-            
             // 发送剩余的记录
             for record in records.drain(..) {
                 if let Err(e) = record_sender.send(record) {
                     return Err(ProcessError::SendError(e.to_string()));
                 }
             }
-            
             drop(record_sender);
             Ok(count)
         });
-
         // 写入记录的线程 - 使用排序的批量写入
         let mut write_count = 0;
         let mut next_index = 0;
         let mut pending_records: Vec<OrderedRecord> = Vec::new();
-
         for ordered_record in result_receiver {
             if ordered_record.index == next_index {
                 // 如果是期望的下一条记录，直接写入
@@ -266,10 +262,8 @@ fn main() -> Result<(), Box<dyn Error>> {
             .help("Output BAM file")
             .required(true))
         .get_matches();
-
     let bam_file = matches.get_one::<String>("bam").unwrap();
     let bed_file = matches.get_one::<String>("bed").unwrap();
     let output_bam_file = matches.get_one::<String>("output").unwrap();
-
     update_bam_mapq(bam_file, bed_file, output_bam_file)
 }
